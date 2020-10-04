@@ -1,8 +1,8 @@
 ﻿using Alpaca.Markets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using Stock_Learning_App.API;
+using System.Collections.Generic;
 
 namespace Stock_Learning_App.Controllers
 {

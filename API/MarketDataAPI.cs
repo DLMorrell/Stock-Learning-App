@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Alpaca.Markets;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alpaca.Markets;
 
 namespace Stock_Learning_App.API
 {
@@ -18,7 +17,7 @@ namespace Stock_Learning_App.API
             IReadOnlyDictionary<string, IReadOnlyList<IAgg>> marketData = AccessMarketData(stockCode, limit).Result;
 
             List<decimal> prices = new List<decimal>();
-            foreach(IAgg price in marketData[stockCode])
+            foreach (IAgg price in marketData[stockCode])
             {
                 prices.Add(price.Close);
             }
