@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Stock_Learning_App.API;
+using Stock_Learning_App.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Stock_Learning_App.Controllers
 {
@@ -18,10 +20,16 @@ namespace Stock_Learning_App.Controllers
         }
 
         [HttpGet]
-        public IReadOnlyList<IPosition> Get()
+        public PortfolioModel Get()
         {
-            var positions = PortfolioAPI.accessPositions();
-            return positions.Result;
+            AccountAPI account = new AccountAPI();
+            Task<IReadOnlyList<IPosition>> positions = PortfolioAPI.accessPositions();
+
+            return new PortfolioModel()
+            {
+                BuyingPower = account.getBuyingPower(),
+                Positions = positions.Result
+            };
         }
     }
 }

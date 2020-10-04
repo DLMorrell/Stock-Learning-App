@@ -4,8 +4,8 @@ export class Portfolio extends Component {
     static displayName = Portfolio.name;
 
   constructor(props) {
-    super(props);
-    this.state = { positions: [], loading: true };
+      super(props);
+      this.state = { portfolio: [], loading: true };
   }
 
   componentDidMount() {
@@ -40,13 +40,15 @@ export class Portfolio extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-        : Portfolio.renderPostitionsTable(this.state.positions);
+        : Portfolio.renderPostitionsTable(this.state.portfolio.positions);
 
     return (
       <div>
-        <h1 id="tabelLabel" >Portfolio</h1>
-        <p>This is a comprehensive list of the stocks you own.</p>
-        {contents}
+            <h1 id="tabelLabel" >Portfolio</h1>
+            <h2 id="buyingPower">Buying Power</h2>
+            <p>{this.state.portfolio.buyingPower}</p>
+            <p>This is a comprehensive list of the stocks you own.</p>
+            {contents}
       </div>
     );
   }
@@ -54,6 +56,6 @@ export class Portfolio extends Component {
     async getPortfolioInfo() {
     const response = await fetch('portfolio');
     const data = await response.json();
-    this.setState({ positions: data, loading: false });
+    this.setState({ portfolio : data, loading: false });
   }
 }

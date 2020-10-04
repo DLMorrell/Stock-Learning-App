@@ -12,9 +12,9 @@ namespace Stock_Learning_App.API
             accessAccount();
         }
 
-        private static async void accessAccount()
+        private static void accessAccount()
         {
-            account = await IAPI.tradingClient.GetAccountAsync();
+            account = IAPI.tradingClient.GetAccountAsync().Result;
         }
 
         public Guid getAccountId()
